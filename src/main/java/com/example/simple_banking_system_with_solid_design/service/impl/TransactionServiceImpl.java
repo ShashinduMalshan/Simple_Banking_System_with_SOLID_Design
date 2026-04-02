@@ -1,55 +1,58 @@
-package com.example.simple_banking_system_with_solid_design.service;
+package com.example.simple_banking_system_with_solid_design.service.impl;
 
+import com.example.simple_banking_system_with_solid_design.entity.Account;
 import com.example.simple_banking_system_with_solid_design.entity.Transaction;
+import com.example.simple_banking_system_with_solid_design.repository.AccountRepository;
 import com.example.simple_banking_system_with_solid_design.repository.TransactionRepository;
+import com.example.simple_banking_system_with_solid_design.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
-    private final TransactionRepository repo;
+    private final TransactionRepository transactionRepo;
+    private final AccountRepository accountRepo;
 
-    // Get all transactions
     @Override
-    public List<Transaction> getAllTransactions() {
-        return repo.findAll();
+    public Transaction deposit(Long accountId, Double amount) {
+        Optional<Account> accountOpt = accountRepo.findById(accountId);
+        if (accountOpt.isEmpty()) return null;
+
+        Account account = accountOpt.get();
+        account.setBalance(account.getBalance() + amount);
+        accountRepo.save(account);
+
+        Transaction transaction = new Transaction();
+        transaction.setAccount(account);
+        transaction.setAmount(amount);
+        transaction.setDate(LocalDateTime.now());
+
+        return transactionRepo.save(transaction);
     }
 
-    // Get a single transaction by ID
     @Override
-    public Transaction getTransactionById(Long id) {
-        Optional<Transaction> transaction = repo.findById(id);
-        return transaction.orElse(null); // or throw exception
-    }
+    public Transaction withdraw(Long accountId, Double amount) {
+        Optional<Account> accountOpt = accountRepo.findById(accountId);
+        if (accountOpt.isEmpty()) return null;
 
-    // Save a new transaction
-    @Override
-    public Transaction saveTransaction(Transaction transaction) {
-        return repo.save(transaction);
-    }
+        Account account = accountOpt.get();
+        if (account.getBalance() < amount) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
 
-    // Update an existing transaction
-    @Override
-    public Transaction updateTransaction(Long id, Transaction transactionDetails) {
-        Transaction existingTransaction = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transaction not found with id " + id));
+        account.setBalance(account.getBalance() - amount);
+        accountRepo.save(account);
 
-        existingTransaction.setAmount(transactionDetails.getAmount());
-        existingTransaction.setType(transactionDetails.getType());
-        existingTransaction.setDate(transactionDetails.getDate());
-        // add other fields as needed
+        Transaction transaction = new Transaction();
+        transaction.setAccount(account);
+        transaction.setAmount(-amount); // negative for withdrawal
+        transaction.setDate(LocalDateTime.now());
 
-        return repo.save(existingTransaction);
-    }
-
-    // Delete a transaction by ID
-    @Override
-    public void deleteTransaction(Long id) {
-        repo.deleteById(id);
+        return transactionRepo.save(transaction);
     }
 }

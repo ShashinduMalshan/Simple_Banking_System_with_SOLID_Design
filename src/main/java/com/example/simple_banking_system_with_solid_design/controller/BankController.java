@@ -31,24 +31,12 @@ public class BankController {
             return accountService.saveAccount(account);
         }
 
-
-
         // Delete an account
         @DeleteMapping("/{id}")
         public void deleteAccount(@PathVariable Long id) {
             accountService.deleteAccount(id);
         }
 
-        // Deposit into account
-        @PutMapping("/{id}/deposit")
-        public Account deposit(@PathVariable Long id, @RequestParam Double amount) {
-            return accountService.deposit(id, amount);
-        }
 
-        // Withdraw from account
-        @PutMapping("/{id}/withdraw")
-        public Account withdraw(@PathVariable Long id, @RequestParam Double amount) {
-            return accountService.withdraw(id, amount);
-        }
     }
 

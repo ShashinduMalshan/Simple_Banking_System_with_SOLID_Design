@@ -14,29 +14,15 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionService service;
-
-
-    // GET transaction by ID
-    @GetMapping("/{id}")
-    public Transaction getTransactionById(@PathVariable Long id) {
-        return service.getTransactionById(id);
+    // Deposit money to an account
+    @PostMapping("/deposit/{accountId}")
+    public Transaction deposit(@PathVariable Long accountId, @RequestParam Double amount) {
+        return service.deposit(accountId, amount);
     }
 
-    // POST create new transaction
-    @PostMapping
-    public Transaction createTransaction(@RequestBody Transaction transaction) {
-        return service.saveTransaction(transaction);
-    }
-
-    // PUT update existing transaction
-    @PutMapping("/{id}")
-    public Transaction updateTransaction(@PathVariable Long id, @RequestBody Transaction transaction) {
-        return service.updateTransaction(id, transaction);
-    }
-
-    // DELETE transaction
-    @DeleteMapping("/{id}")
-    public void deleteTransaction(@PathVariable Long id) {
-        service.deleteTransaction(id);
+    // Withdraw money from an account
+    @PostMapping("/withdraw/{accountId}")
+    public Transaction withdraw(@PathVariable Long accountId, @RequestParam Double amount) {
+        return service.withdraw(accountId, amount);
     }
 }
