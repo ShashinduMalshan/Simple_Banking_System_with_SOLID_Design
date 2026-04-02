@@ -1,7 +1,7 @@
 
 ---
 
-## 📘 **SOLID Principles – Simple Explanation with Banking System Example**
+##  **SOLID Principles – Simple Explanation with Banking System Example**
 
 ### 🔹 What is SOLID?
 
@@ -11,10 +11,10 @@ SOLID is a set of **5 design principles in Object-Oriented Programming (OOP)** t
 
 ## 🔹 1. Single Responsibility Principle (SRP)
 
-👉 **Definition:**
+ **Definition:**
 A class should have **only one responsibility** (one job).
 
-👉 **In our project:**
+ **In our project:**
 
 * `CustomerService` → handles customer logic
 * `AccountService` → handles account operations
@@ -26,10 +26,10 @@ A class should have **only one responsibility** (one job).
 
 ## 🔹 2. Open/Closed Principle (OCP)
 
-👉 **Definition:**
+ **Definition:**
 Software should be **open for extension but closed for modification**.
 
-👉 **In our project:**
+ **In our project:**
 
 * We use interfaces like `TransactionService`, `AccountService`
 * If we want new features, we can create new implementations without changing old code
@@ -40,10 +40,10 @@ Software should be **open for extension but closed for modification**.
 
 ## 🔹 3. Liskov Substitution Principle (LSP)
 
-👉 **Definition:**
+ **Definition:**
 Child classes should be able to replace parent classes without breaking the system.
 
-👉 **In our project:**
+ **In our project:**
 
 * `TransactionServiceImpl` can replace `TransactionService`
 * Controller uses interface, not implementation
@@ -54,10 +54,10 @@ Child classes should be able to replace parent classes without breaking the syst
 
 ## 🔹 4. Interface Segregation Principle (ISP)
 
-👉 **Definition:**
+ **Definition:**
 Do not force a class to implement methods it does not use.
 
-👉 **In our project:**
+ **In our project:**
 
 * Separate interfaces:
 
@@ -71,10 +71,10 @@ Do not force a class to implement methods it does not use.
 
 ## 🔹 5. Dependency Inversion Principle (DIP)
 
-👉 **Definition:**
+ **Definition:**
 High-level modules should depend on **abstractions (interfaces)**, not concrete classes.
 
-👉 **In our project:**
+ **In our project:**
 
 ```java
 private final AccountService accountService;
@@ -101,11 +101,11 @@ private final AccountService accountService;
 * `service` → business logic (SOLID applied)
 * `repository` → database access
 * `entity` → database models
-* `dto` → data transfer
+* `model` → data transfer
 
 ---
 
-## ✅ **How SOLID is Used in This Project**
+##  **How SOLID is Used in This Project**
 
 | Principle | How We Used                                          |
 | --------- | ---------------------------------------------------- |
@@ -117,7 +117,7 @@ private final AccountService accountService;
 
 ---
 
-## 🎯 **Conclusion**
+##  **Conclusion**
 
 Using SOLID principles helps to:
 
