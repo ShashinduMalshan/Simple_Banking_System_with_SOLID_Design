@@ -20,7 +20,7 @@ A class should have **only one responsibility** (one job).
 * `AccountService` → handles account operations
 * `TransactionService` → handles transactions
 
-✅ Each class does only one thing → **SRP followed**
+ Each class does only one thing → **SRP followed**
 
 ---
 
@@ -34,7 +34,7 @@ Software should be **open for extension but closed for modification**.
 * We use interfaces like `TransactionService`, `AccountService`
 * If we want new features, we can create new implementations without changing old code
 
-✅ Example: Add new transaction types without modifying existing logic
+ Example: Add new transaction types without modifying existing logic
 
 ---
 
@@ -48,7 +48,7 @@ Child classes should be able to replace parent classes without breaking the syst
 * `TransactionServiceImpl` can replace `TransactionService`
 * Controller uses interface, not implementation
 
-✅ System works even if implementation changes
+ System works even if implementation changes
 
 ---
 
@@ -65,7 +65,7 @@ Do not force a class to implement methods it does not use.
     * `AccountService`
     * `TransactionService`
 
-✅ Each interface is small and focused
+ Each interface is small and focused
 
 ---
 
@@ -82,7 +82,7 @@ private final AccountService accountService;
 
 * Controller depends on interface, not `AccountServiceImpl`
 
-✅ Makes code flexible and testable
+ Makes code flexible and testable
 
 ---
 

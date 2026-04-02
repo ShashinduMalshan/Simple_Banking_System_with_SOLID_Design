@@ -5,6 +5,7 @@ import com.example.simple_banking_system_with_solid_design.entity.Transaction;
 import com.example.simple_banking_system_with_solid_design.repository.AccountRepository;
 import com.example.simple_banking_system_with_solid_design.repository.TransactionRepository;
 import com.example.simple_banking_system_with_solid_design.service.TransactionService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepo;
