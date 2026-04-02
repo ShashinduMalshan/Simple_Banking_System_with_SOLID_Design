@@ -26,7 +26,7 @@ public class BankController {
         }
 
         // Create a new account
-        @PostMapping
+        @PostMapping("/createAccount")
         public Account createAccount(@RequestBody Account account) {
             return accountService.saveAccount(account);
         }
