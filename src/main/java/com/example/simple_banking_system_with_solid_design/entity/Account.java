@@ -1,7 +1,9 @@
 package com.example.simple_banking_system_with_solid_design.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 public class Account {
 
